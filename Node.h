@@ -10,7 +10,7 @@ class Node {
     public:
         //Constructors
         Node() : data(0), next(nullptr), prev(nullptr) {};
-        Node(T data) : data(data), next(nullptr), prev(nullptr) {};
+        Node(T inVal) : data(inVal), next(nullptr), prev(nullptr) {};
 };
 
 

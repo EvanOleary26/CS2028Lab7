@@ -4,12 +4,12 @@
 template <class>
 class List {
     private:
-        Node<T> *head;
-        Node<T> *tail;
+        Node<T> *first;
+        Node<T> *last;
         int length;
     public:
         //Constructors
-        List() : head(nullptr), tail(nullptr), length(0) {};
+        List() : first(nullptr), last(nullptr), length(0) {};
 
         //Destructor
         ~List();
@@ -28,10 +28,6 @@ class List {
         bool operator<(const List<T> &right) const;
         bool operator>(const List<T> &right) const;
         bool operator==(const List<T> &right) const;
-        
-
-        
-
 };
 
 #endif
