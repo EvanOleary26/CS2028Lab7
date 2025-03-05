@@ -5,14 +5,12 @@ template<class T>
 class Node {
     public:
         T data;
-        Node *next;
-        Node *prev;
+        Node<T> *next;
+        Node<T> *prev;
     
         //Constructors
         Node() : data(0), next(nullptr), prev(nullptr) {};
         Node(T inVal) : data(inVal), next(nullptr), prev(nullptr) {};
-
-        templacefriend List;
 };
 
 

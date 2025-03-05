@@ -45,7 +45,7 @@ void List<T>::AddItem(T *inVal) {
 
 template <class T>
 T *List<T>::GetItem(T *target) {
-    Node *temp = first;
+    Node<T> *temp = first;
 
 	if (first == nullptr) {
 	//Check if list is empty
@@ -85,7 +85,7 @@ T *List<T>::GetItem(T *target) {
         last = temp->prev;
     }
     //Connect previous to next and next to previous then return the value of the item removed
-    Node *placeholder = temp->prev;
+    Node<T> *placeholder = temp->prev;
     temp->prev = temp->next;
     temp->next = placeholder;
     delete placeholder;
@@ -95,7 +95,7 @@ T *List<T>::GetItem(T *target) {
 
 template <class T>
 bool List<T>::IsInList(T *target) {
-    Node *temp = first;
+    Node<T> *temp = first;
     if (first == nullptr) {
     //Return false if no items in the list
         return false;
@@ -135,7 +135,7 @@ int List<T>::Size() {
 template <class T>
 T *List<T>::SeeNext() {
     Node<T> temp = first;
-    while (temp != nullptr && temp->data != target) {
+    while (temp != nullptr && temp->data != target) { //What does target need to be here?
         temp = temp->next;
         if (temp == nullptr) {
                 //throw exception
@@ -147,7 +147,7 @@ T *List<T>::SeeNext() {
 template <class T>
 T *List<T>::SeePrev() {
     Node<T> temp = first;
-    while (temp != nullptr && temp->data != target) {
+    while (temp != nullptr && temp->data != target) { //What does target need to be here?
         temp = temp->next;
         if (temp == nullptr) {
                 //throw exception
@@ -159,7 +159,7 @@ T *List<T>::SeePrev() {
 template <class T>
 T *List<T>::SeeAt(int target) {
     Node<T> temp = first;
-    for (i = 0; i < target; i++) {
+    for (int i = 0; i < target; i++) {
         temp = temp->next;
         if (temp == nullptr) {
             //throw exception

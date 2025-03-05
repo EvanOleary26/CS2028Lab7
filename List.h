@@ -6,8 +6,8 @@
 template <class T>
 class List {
     private:
-        Node *first;
-        Node *last;
+        Node<T> *first;
+        Node<T> *last;
         int length;
         int location;
     public:

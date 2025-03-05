@@ -16,14 +16,14 @@ class Part {
     public:
         //Constutructors
         Part() : sku(0), description(""), price(0), uom(""), quantityOnHand(0), leadTime(0) {};
-        Part(int sku, std::string description, int price, std::string uom, int quantityOnHand = 0, int leadTime) 
-         : sku(sku), description(description), price(price), uom(uom), quantityOnHand(quantityOnHand), leadTime(leadTime) {};
+        Part(int sku, std::string description, int price, std::string uom, int leadTime, int quantityOnHand = 0) 
+         : sku(sku), description(description), price(price), uom(uom), leadTime(leadTime), quantityOnHand(quantityOnHand) {};
 
         //Functions
         std::string getPartInfo();
         int getPrice() { return price; }
         bool inStock() { return quantityOnHand > 0; }
-        bool Available(int date);
+        bool Available(int day, int month, int year);
 
         //Operator Overloads
         bool operator>(const Part &right) const;
