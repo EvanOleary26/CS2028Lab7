@@ -1,16 +1,19 @@
 #ifndef __NODE__H
 #define __NODE__H
 
-template<class>
+#include "List.h"
+
+template<class T>
 class Node {
-    private:
-        T data;
-        T *next;
-        T *prev;
     public:
+        T data;
+        Node<T> *next;
+        Node<T>*prev;
         //Constructors
         Node() : data(0), next(nullptr), prev(nullptr) {};
         Node(T inVal) : data(inVal), next(nullptr), prev(nullptr) {};
+
+        templacefriend List;
 };
 
 
