@@ -50,6 +50,50 @@ class List {
             length++;
         }
 
+	Data <T> GetItem(T target) {
+		Node *temp = first;
+		if (first == nullptr) {
+	//Check if list is empty
+			return nullptr;
+		}
+		if (first->data == target) {
+		//Check if the first item in the list is the one that should be removed
+			length--;
+			if (first->next == nullptr) {
+				//If there is only one item in the list
+				first=nullptr;
+				last=nullptr;
+				return temp->data;
+			} else {
+				//If there is more than one item in the list
+				T hold = first->data;
+				first=first->next;
+				temp=temp->next;
+				temp->prev = nullptr;
+				return hold;
+			}
+			while (temp->data != target && temp->next != nullptr) {
+				//Move through the list while not at the item to remove or at the end
+				temp = temp->next;
+			}
+			if (temp->next == nullptr && temp->data != target) {
+				//Check if the loop got to the end of the list without finding the item
+				return nullptr;
+			}
+			if (temp->next == nullptr && temp->data == target) {
+			//Check if the last item in the list is the target
+				last = temp->prev;
+			}
+			//Connect previous to next and next to previous then return the value of the item removed
+			Node *placeholder = temp->prev;
+			temp->prev = temp->next;
+			temp->next = placeholder;
+			delete placeholder;
+			length--;
+			return temp;
+		}
+	}
+
         bool IsInList(T target) {
             Node<T> temp = first;
             bool found = 0
@@ -66,10 +110,6 @@ class List {
         bool IsEmpty() {
             return length == 0
         }
-
-        /*
-        bool IsEmpty();
-        */
 
     	int Size() {
 		return length;
