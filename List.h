@@ -4,11 +4,12 @@
 #include "Node.h"
 
 template <class T>
-class LinkedList {
+class List {
     private:
         Node *first;
         Node *last;
         int length;
+        int location;
     public:
         //Constructors
         List() : first(nullptr), last(nullptr), length(0) {};
@@ -24,7 +25,7 @@ class LinkedList {
         int Size();
         T *SeeNext();
         T *SeePrev();
-        T *SeeAt(int index);
+        T *SeeAt(int target);
         void Reset();
 
         //Operator Overloads

@@ -1,12 +1,50 @@
 #include "List.h"
 
 template <class T>
-void LinkedList<T>::AddItem(T *inVal) {
-    
+List<T>::~List() {
+    while (first != nullptr) {
+        Node<T>* temp = first;
+        first = first->next;
+        delete temp;
+    }
 }
 
 template <class T>
-T *LinkedList<T>::GetItem(T *target) {
+void List<T>::AddItem(T *inVal) {
+    Node<T>* newNode = new Node<T>(inVal);
+    if (first == nullptr) {
+        first = newNode;
+        last = newNode;
+    }
+    else {
+        Node<T>* temp = first;
+        while (temp != nullptr) {
+            if (inVal < temp->data) {
+                newNode->next = temp;
+                newNode->prev = temp->prev;
+                if (temp->prev != nullptr) {
+                    temp->prev->next = newNode;
+                }
+                else {
+                    first = newNode;
+                    break;
+                }
+            }
+            else if (temp->next == nullptr) {
+                temp->next = newNode;
+                newNode->prev = temp;
+                last = newNode;
+                break;
+            }
+            temp = temp->next;
+        }
+    }
+    length++;
+}
+
+
+template <class T>
+T *List<T>::GetItem(T *target) {
     Node *temp = first;
 
 	if (first == nullptr) {
@@ -56,7 +94,7 @@ T *LinkedList<T>::GetItem(T *target) {
 }
 
 template <class T>
-bool LinkedList<T>::IsInList(T *target) {
+bool List<T>::IsInList(T *target) {
     Node *temp = first;
     if (first == nullptr) {
     //Return false if no items in the list
@@ -82,7 +120,7 @@ bool LinkedList<T>::IsInList(T *target) {
 }
 
 template <class T>
-bool LinkedList<T>::IsEmpty() {
+bool List<T>::IsEmpty() {
     if (first == nullptr) {
         return true;
     }
@@ -90,22 +128,48 @@ bool LinkedList<T>::IsEmpty() {
 }
 
 template <class T>
-int LinkedList<T>::Size() {
+int List<T>::Size() {
     return length;
 }
 
 template <class T>
-T *LinkedList<T>::SeeNext() {
+T *List<T>::SeeNext() {
+    Node<T> temp = first;
+    while (temp != nullptr && temp->data != target) {
+        temp = temp->next;
+        if (temp == nullptr) {
+                //throw exception
+        }
+    }
+    return temp->next;
 }
 
 template <class T>
-T *LinkedList<T>::SeePrev() {
+T *List<T>::SeePrev() {
+    Node<T> temp = first;
+    while (temp != nullptr && temp->data != target) {
+        temp = temp->next;
+        if (temp == nullptr) {
+                //throw exception
+        }
+    }
+    return temp->prev;
 }
 
 template <class T>
-T *LinkedList<T>::SeeAt(int index) {
+T *List<T>::SeeAt(int target) {
+    Node<T> temp = first;
+    for (i = 0; i < target; i++) {
+        temp = temp->next;
+        if (temp == nullptr) {
+            //throw exception
+        }
+    }
+    location = temp->data;
+    return location;
 }
 
 template <class T>
-void LinkedList<T>::Reset() {
+void List<T>::Reset() {
+    location = 0;
 }
