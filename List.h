@@ -49,34 +49,52 @@ class List {
             }
             length++;
         }
+
+        bool IsInList(T target) {
+            Node<T> temp = first;
+            bool found = 0
+            while (temp != nullptr && temp->data != inVal) {
+                temp = temp->next;
+                if (temp->data == target) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+
+        bool IsEmpty() {
+            return length == 0
+        }
+
         /*
-        T GetItem(T target);
-        bool IsInList(T target);
         bool IsEmpty();
         */
+
     	int Size() {
-			return length;
-		}
+		return length;
+	}
         T SeeNext(T target) {
-            Node<T> temp = first;
-            while (temp != nullptr && temp->data != target) {
-                temp = temp->next;
-                if (temp == nullptr) {
-                    //throw exception
-                }
-            }
-        return temp->next;
+		Node<T> temp = first;
+            	while (temp != nullptr && temp->data != target) {
+                	temp = temp->next;
+                	if (temp == nullptr) {
+                    		//throw exception
+                	}
+           	}
+        	return temp->next;
         }
         T SeePrev(T target) {
-            Node<T> temp = first;
-            while (temp != nullptr && temp->data != target) {
-                temp = temp->next;
-                if (temp == nullptr) {
-                    //throw exception
-                }
-            }
-            return temp->prev;
+        	Node<T> temp = first;
+            	while (temp != nullptr && temp->data != target) {
+                	temp = temp->next;
+                	if (temp == nullptr) {
+                    		//throw exception
+                	}
+            	}
+            	return temp->prev;
         }
+
         T SeeAt(int target) {
             Node<T> temp = first;
             for (i = 0; i < target; i++) {
