@@ -9,6 +9,7 @@ class List {
         Node<T>* first;
         Node<T>* last;
         int length;
+        int location;
     public:
         //Constructors
         List() : first(nullptr), last(nullptr), length(0) {};
@@ -77,15 +78,19 @@ class List {
             }
             return temp->prev;
         }
-        T SeeAt(int location) {
+        T SeeAt(int target) {
             Node<T> temp = first;
-            for (i = 0; i < location; i++) {
+            for (i = 0; i < target; i++) {
                 temp = temp->next;
                 if (temp == nullptr) {
                     //throw exception
                 }
             }
-            return temp->data;
+            location = temp->data;
+            return location;
+        }
+        void Reset(int &location) {
+            location = 0;
         }
 
         //Operator Overloads
