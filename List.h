@@ -56,8 +56,40 @@ class List {
         T SeeNext();
         T SeePrev();
         void Reset();
+        */
+        T SeeNext(T target) {
+            Node<T> temp = first;
+            while (temp != nullptr && temp->data != target) {
+                temp = temp->next;
+                if (temp == nullptr) {
+                    //throw exception
+                }
+            }
+        return temp->next;
+        }
+        T SeePrev(T target) {
+            Node<T> temp = first;
+            while (temp != nullptr && temp->data != target) {
+                temp = temp->next;
+                if (temp == nullptr) {
+                    //throw exception
+                }
+            }
+            return temp->prev;
+        }
+        T SeeAt(int location) {
+            Node<T> temp = first;
+            for (i = 0; i < location; i++) {
+                temp = temp->next;
+                if (temp == nullptr) {
+                    //throw exception
+                }
+            }
+            return temp->data;
+        }
 
         //Operator Overloads
+        /*
         bool operator<(const List<T> &right) const;
         bool operator>(const List<T> &right) const;
         bool operator==(const List<T> &right) const;
