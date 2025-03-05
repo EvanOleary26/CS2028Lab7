@@ -15,13 +15,7 @@ class List {
         List() : first(nullptr), last(nullptr), length(0) {};
 
         //Destructor
-        ~List() {
-            while (first != nullptr) {
-                Node<T>* temp = first;
-                first = first->next;
-                delete temp;
-            }
-        }
+        ~List();
 
         //Functions
         void AddItem(T *inVal);
