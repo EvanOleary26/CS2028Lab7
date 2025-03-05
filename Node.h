@@ -5,8 +5,8 @@ template<class T>
 class Node {
     public:
         T data;
-        T *next;
-        T *prev;
+        Node *next;
+        Node *prev;
     
         //Constructors
         Node() : data(0), next(nullptr), prev(nullptr) {};

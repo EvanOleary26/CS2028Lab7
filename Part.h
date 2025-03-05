@@ -21,8 +21,8 @@ class Part {
 
         //Functions
         std::string getPartInfo();
-        int getPrice();
-        bool inStock();
+        int getPrice() { return price; }
+        bool inStock() { return quantityOnHand > 0; }
         bool Available(int date);
 
         //Operator Overloads

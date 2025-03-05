@@ -6,8 +6,8 @@
 template <class T>
 class LinkedList {
     private:
-        Node<T> *first;
-        Node<T> *last;
+        Node *first;
+        Node *last;
         int length;
     public:
         //Constructors
