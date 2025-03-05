@@ -6,10 +6,10 @@
 
 class Part {
     private:
-        int sku;
+        int sku;            //Stock Keeping Unit
         std::string description;
         int price;
-        std::string uom;
+        std::string uom;    //Unit of Measure
         int quantityOnHand;
         int leadTime;
 

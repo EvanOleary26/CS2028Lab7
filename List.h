@@ -1,8 +1,10 @@
 #ifndef __LIST__H
 #define __LIST__H
 
-template <class>
-class List {
+#include "Node.h"
+
+template <class T>
+class LinkedList {
     private:
         Node<T> *first;
         Node<T> *last;
@@ -15,13 +17,14 @@ class List {
         ~List();
 
         //Functions
-        void AddItem(T inVal);
-        T GetItem(T target);
-        bool IsInList(T target);
+        void AddItem(T *inVal);
+        T *GetItem(T *target);
+        bool IsInList(T *target);
         bool IsEmpty();
         int Size();
-        T SeeNext();
-        T SeePrev();
+        T *SeeNext();
+        T *SeePrev();
+        T *SeeAt(int index);
         void Reset();
 
         //Operator Overloads
