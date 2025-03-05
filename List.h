@@ -53,11 +53,10 @@ class List {
         T GetItem(T target);
         bool IsInList(T target);
         bool IsEmpty();
-        int Size();
-        T SeeNext();
-        T SeePrev();
-        void Reset();
         */
+    	int Size() {
+			return length;
+		}
         T SeeNext(T target) {
             Node<T> temp = first;
             while (temp != nullptr && temp->data != target) {
