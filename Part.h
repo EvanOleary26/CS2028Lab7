@@ -23,7 +23,7 @@ class Part {
         std::string getPartInfo();
         int getPrice() { return price; }
         bool inStock() { return quantityOnHand > 0; }
-        bool Available(int day, int month, int year);
+        bool Available(int month, int day);
 
         //Operator Overloads
         bool operator>(const Part &right) const;
