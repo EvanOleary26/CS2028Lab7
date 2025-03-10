@@ -1,4 +1,5 @@
 #include "List.h"
+#include "Part.h"
 
 template <class T>
 List<T>::~List() {
@@ -10,7 +11,8 @@ List<T>::~List() {
 }
 
 template <class T>
-void List<T>::AddItem(T *inVal) {
+void List<T>::AddItem(T inVal) {
+    Reset();        //Reset curLocation if the list is changed
     Node<T>* newNode = new Node<T>(inVal);
     if (first == nullptr) {
         first = newNode;
@@ -27,8 +29,9 @@ void List<T>::AddItem(T *inVal) {
                 }
                 else {
                     first = newNode;
-                    break;
                 }
+                temp->prev = newNode;
+                break;
             }
             else if (temp->next == nullptr) {
                 temp->next = newNode;
@@ -44,30 +47,30 @@ void List<T>::AddItem(T *inVal) {
 
 
 template <class T>
-T *List<T>::GetItem(T *target) {
+T List<T>::GetItem(T target) {
+    Reset();       //Reset curLocation if the list is changed
     Node<T> *temp = first;
 
 	if (first == nullptr) {
 	//Check if list is empty
-		return nullptr;
+		throw Exception(1, "List is empty");
 	}
 
     if (first->data == target) {
     //Check if the first item in the list is the one that should be removed
-    length--;
+        length--;
         if (first->next == nullptr) {
         //If there is only one item in the list
             first=nullptr;
             last=nullptr;
-            return temp->data;
         } else {
         //If there is more than one item in the list
-            T hold = first->data;
-            first=first->next;
-            temp=temp->next;
-            temp->prev = nullptr;
-            return hold;
+            first = first->next;
+            first->prev = nullptr;
         }
+        T *data = new T(temp->data);
+        delete temp;
+        return *data;
     }
 
     while (temp->data != target && temp->next != nullptr) {
@@ -75,26 +78,30 @@ T *List<T>::GetItem(T *target) {
         temp = temp->next;
     }
 
-    if (temp->next == nullptr && temp->data != target) {
+    if (temp->next == nullptr) {
     //Check if the loop got to the end of the list without finding the item
-        return nullptr;
+        throw Exception(1, "Item not found");
     }
     
-    if (temp->next == nullptr && temp->data == target) {
+    if (temp->next != nullptr) {
     //Check if the last item in the list is the target
-        last = temp->prev;
+        temp->next->prev = temp->prev;
     }
+
+    if (temp->prev != nullptr) {
+    //Check if the first item in the list is the target
+        temp->prev->next = temp->next;
+    }
+
     //Connect previous to next and next to previous then return the value of the item removed
-    Node<T> *placeholder = temp->prev;
-    temp->prev = temp->next;
-    temp->next = placeholder;
-    delete placeholder;
+    T *data = new T(temp->data);
+    delete temp;
     length--;
-    return temp;
+    return *data;
 }
 
 template <class T>
-bool List<T>::IsInList(T *target) {
+bool List<T>::IsInList(T target) {
     Node<T> *temp = first;
     if (first == nullptr) {
     //Return false if no items in the list
@@ -133,43 +140,59 @@ int List<T>::Size() {
 }
 
 template <class T>
-T *List<T>::SeeNext() {
-    Node<T> temp = first;
-    while (temp != nullptr && temp->data != target) { //What does target need to be here?
-        temp = temp->next;
-        if (temp == nullptr) {
-                //throw exception
-        }
+T List<T>::SeeNext() {
+    if (first == nullptr) {
+        throw Exception(1, "List is empty");
     }
-    return temp->next;
+
+    if (curLocation == nullptr) {
+        curLocation = first;
+    } else {
+        curLocation = curLocation->next;
+    }
+    
+    if (curLocation == nullptr) {
+        throw Exception(1, "Index out of bounds");
+    }
+
+    return curLocation->data;
 }
 
 template <class T>
-T *List<T>::SeePrev() {
-    Node<T> temp = first;
-    while (temp != nullptr && temp->data != target) { //What does target need to be here?
-        temp = temp->next;
-        if (temp == nullptr) {
-                //throw exception
-        }
+T List<T>::SeePrev() {
+    if (last == nullptr) {
+        throw Exception(1, "List is empty");
     }
-    return temp->prev;
+
+    if (curLocation == nullptr) {
+        curLocation = last;
+    } else {
+        curLocation = curLocation->prev;
+    }
+    
+    if (curLocation == nullptr) {
+        throw Exception(1, "Index out of bounds");
+    }
+
+    return curLocation->data;
 }
 
 template <class T>
-T *List<T>::SeeAt(int target) {
-    Node<T> temp = first;
+T List<T>::SeeAt(int target) {
+    Node<T> *temp = first;
     for (int i = 0; i < target; i++) {
         temp = temp->next;
         if (temp == nullptr) {
-            //throw exception
+            throw Exception(1, "Index out of bounds");
         }
     }
-    location = temp->data;
-    return location;
+    curLocation = temp;
+    return temp->data;
 }
 
 template <class T>
 void List<T>::Reset() {
-    location = 0;
+    curLocation = nullptr;
 }
+
+template class List<Part>;

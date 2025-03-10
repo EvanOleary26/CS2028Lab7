@@ -10,16 +10,13 @@ bool Part::Available(int day, int month, int year) {
 }
 
 bool Part::operator>(const Part &right) const {
-    //replace return with actual code
-    return false;
+    return this->sku > right.sku;
 }
 
 bool Part::operator<(const Part &right) const {
-    //replace return with actual code
-    return false;
+    return this->sku < right.sku;
 }
 
 bool Part::operator==(const Part &right) const {
-    //replace return with actual code
-    return false;
+    return this->sku == right.sku;
 }
