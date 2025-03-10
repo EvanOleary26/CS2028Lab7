@@ -190,9 +190,26 @@ T List<T>::SeeAt(int target) {
     return temp->data;
 }
 
+
 template <class T>
 void List<T>::Reset() {
     curLocation = nullptr;
 }
+
+template <class T>
+bool List<T>::operator==(const List<T>& right) const {
+    return this->first->data == right.first->data;
+}
+
+template <class T>
+bool List<T>::operator>(const List<T>& right) const {
+    return this->first->data > right.first->data;
+}
+
+template <class T>
+bool List<T>::operator<(const List<T>& right) const {
+    return this->first->data < right.first->data;
+}
+
 
 template class List<Part>;
