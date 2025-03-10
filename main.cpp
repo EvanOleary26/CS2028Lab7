@@ -165,7 +165,10 @@ int main() {
                         std::cout << list.SeePrev().getPartInfo() << std::endl;
                     } else if (listTestChoice == 8) {
                         //Test SeeAt function
-                        std::cout << list.SeeAt(2).getPartInfo() << std::endl;
+                    	std::cout << "Where in the list would you like to look?" << std::endl;
+                    	int seeAtIndex = 0;
+			std::cin >> seeAtIndex;
+              		std::cout << parts.SeeAt(seeAtIndex).getPartInfo() << std::endl;
                     } else if (listTestChoice == 9) {
                         //Test Reset function
                         list.Reset();
