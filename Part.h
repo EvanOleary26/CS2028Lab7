@@ -2,7 +2,7 @@
 #define __PART__H
 
 #include <iostream>
-
+#include <String>
 
 class Part {
     private:
