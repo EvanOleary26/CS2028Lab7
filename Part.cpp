@@ -1,6 +1,6 @@
 #include "Part.h"
 #include "Exceptions.h"
-
+#include <String>
 #include <ctime>
 #include <map>
 
