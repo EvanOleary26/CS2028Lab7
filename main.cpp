@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <String>
 #include "List.h"
 #include "Part.h"
 #include "Exceptions.h"
