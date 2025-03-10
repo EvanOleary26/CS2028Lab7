@@ -16,7 +16,7 @@ Part getUserPartInfo() {
     std::cout << "Enter the part's SKU (Stock Keeping Number): ";
     std::cin >> sku;
     std::cout << "Enter the part's Description: ";
-    std::cin >> description;
+    std::getline(std::cin, description);
     std::cout << "Enter the part's Price: ";
     std::cin >> price;
     std::cout << "Enter the part's UOM (Unit of Measure): ";
