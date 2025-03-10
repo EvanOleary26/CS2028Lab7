@@ -10,8 +10,8 @@ class Part {
         std::string description;
         int price;
         std::string uom;    //Unit of Measure
-        int quantityOnHand;
         int leadTime;
+        int quantityOnHand;
 
     public:
         //Constutructors
