@@ -15,18 +15,26 @@ Part getUserPartInfo() {
 
     std::cout << "Enter the part's SKU (Stock Keeping Number): ";
     std::cin >> sku;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the newline left in the buffer
+
     std::cout << "Enter the part's Description: ";
-    std::cin.ignore();
     std::getline(std::cin, description);
+
     std::cout << "Enter the part's Price: ";
     std::cin >> price;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the newline left in the buffer
+
     std::cout << "Enter the part's UOM (Unit of Measure): ";
-    std::cin >> uom;
+    std::getline(std::cin, uom);
+
     std::cout << "Enter the part's Lead Time: ";
     std::cin >> leadTime;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the newline left in the buffer
+
     std::cout << "Enter the part's Quantity On Hand: ";
     std::cin >> quantityOnHand;
-    
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore the newline left in the buffer
+
     return Part(sku, description, price, uom, leadTime, quantityOnHand);
 }
 
