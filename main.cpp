@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <string>
 
@@ -47,7 +48,7 @@ int main() {
     Part part2(2, "Part 2", 20, "Each", 10, 10);
     Part part3(3, "Part 3", 30, "Each", 15, 15);
     Part part4(4, "Part 4", 40, "Each", 20, 20);
-    
+
     parts.AddItem(part1);
     parts.AddItem(part2);
     parts.AddItem(part3);
@@ -69,13 +70,13 @@ int main() {
         std::cout << parts.GetItem(part1).getPartInfo() << std::endl;
 
         std::cout << part3.Available(1, 1) << std::endl;
-        
+
     } catch (Exception e) {
         std::cout << "Exception: " << e.errorMessage << std::endl;
     }
 */
 
-    
+
     int opChoice = 0;
     int partTestChoice = 0;
     int listTestChoice = 0;
@@ -85,17 +86,17 @@ int main() {
     while (true) {
         //Get users choice of Part or List function testing
         std::cout << "\nWhat would you like to do?" << std::endl;
-		std::cout << "1. Test Part functions\n2. Test Linked List Functions\n3. Quit" << std::endl;
-		
-		opChoice = 0;
-		std::cin >> opChoice;
+        std::cout << "1. Test Part functions\n2. Test Linked List Functions\n3. Quit" << std::endl;
 
-        if (opChoice == 1){
+        opChoice = 0;
+        std::cin >> opChoice;
+
+        if (opChoice == 1) {
             //Part function testing
             while (true) {
                 std::cout << "\nWhich Part function would you like to test?" << std::endl;
-                std::cout << "1. getPartInfo\n2. inStock\n3. Available\n4. Go Back" << std::endl;
-                
+                std::cout << "1. getPartInfo\n2. inStock\n3. Available\n4. Display Part Info\n5. Go Back" << std::endl;
+
                 partTestChoice = 0;
                 std::cin >> partTestChoice;
                 try {
@@ -103,14 +104,17 @@ int main() {
                     if (partTestChoice == 1) {
                         //Test getPartInfo function
                         std::cout << part.getPartInfo() << std::endl;
-                    } else if (partTestChoice == 2) {
+                    }
+                    else if (partTestChoice == 2) {
                         //Test inStock function
                         if (part.inStock()) {
                             std::cout << "Part is in stock" << std::endl;
-                        } else {
+                        }
+                        else {
                             std::cout << "Part is not in stock" << std::endl;
                         }
-                    } else if (partTestChoice == 3) {
+                    }
+                    else if (partTestChoice == 3) {
                         //Test Available function
                         std::cout << "Please enter the month, day, and year you would like to check for availability" << std::endl;
                         int month{};
@@ -123,28 +127,37 @@ int main() {
                         std::cin >> day;
                         std::cout << "Year: ";
                         std::cin >> year;
-                        
+
                         if (part.Available(month, day, year)) {
                             std::cout << part.getPartInfo() << " is available" << std::endl;
-                        } else {
+                        }
+                        else {
                             std::cout << part.getPartInfo() << " is not available" << std::endl;
                         }
-                    } else if (partTestChoice == 4) {
+                    }
+					else if (partTestChoice == 4) {
+						//Display part
+                        part.display();
+					}
+                    else if (partTestChoice == 5) {
                         //Go back
                         break;
-                    } else {
+                    }
+                    else {
                         std::cout << "Invalid choice" << std::endl;
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     std::cout << "Exception in Part: " << e.errorMessage << std::endl;
                 }
             }
-        } else if (opChoice == 2) {
+        }
+        else if (opChoice == 2) {
             //List function testing
             while (true) {
                 std::cout << "\nWhich List function would you like to test?" << std::endl;
-                std::cout << "1. AddItem\n2. GetItem\n3. IsInList\n4. IsEmpty\n5. Size\n6. SeeNext\n7. SeePrev\n8. SeeAt\n9. Reset\n10. Go Back" << std::endl;
-                
+                std::cout << "1. AddItem\n2. GetItem\n3. IsInList\n4. IsEmpty\n5. Size\n6. SeeNext\n7. SeePrev\n8. SeeAt\n9. Reset\n10. Display List\n11.Go Back" << std::endl;
+
                 listTestChoice = 0;
                 std::cin >> listTestChoice;
 
@@ -154,58 +167,79 @@ int main() {
                         //Test AddItem function
                         list.AddItem(getUserPartInfo());
                         std::cout << "Added " << list.SeeNext().getPartInfo() << std::endl;
-                    } else if (listTestChoice == 2) {
+                    }
+                    else if (listTestChoice == 2) {
                         //Test GetItem function
                         std::cout << "Removed " << list.GetItem(part).getPartInfo() << std::endl;
-                    } else if (listTestChoice == 3) {
+                    }
+                    else if (listTestChoice == 3) {
                         //Test IsInList function
                         std::cout << "Enter the part you would like to check for in the list" << std::endl;
                         part = getUserPartInfo();
-                        if (list.IsInList(part)) {
+                        bool inList = list.IsInList(part);
+                        if (inList) {
                             std::cout << "Part is in list" << std::endl;
-                        } else {
+                        }
+                        else {
                             std::cout << "Part is not in list" << std::endl;
                         }
-                    } else if (listTestChoice == 4) {
+                    }
+                    else if (listTestChoice == 4) {
                         //Test IsEmpty function
-                        if (list.IsEmpty()) {
+						bool listempty = list.IsEmpty();
+                        if (listempty) {
                             std::cout << "List is empty" << std::endl;
-                        } else {
+                        }
+                        else {
                             std::cout << "List is not empty" << std::endl;
                         }
-                    } else if (listTestChoice == 5) {
+                    }
+                    else if (listTestChoice == 5) {
                         //Test Size function
                         std::cout << "The size of the list is " << list.Size() << std::endl;
-                    } else if (listTestChoice == 6) {
+                    }
+                    else if (listTestChoice == 6) {
                         //Test SeeNext function
                         std::cout << "The next part in the list is " << list.SeeNext().getPartInfo() << std::endl;
-                    } else if (listTestChoice == 7) {
+                    }
+                    else if (listTestChoice == 7) {
                         //Test SeePrev function
                         std::cout << "The previous part in the list is " << list.SeePrev().getPartInfo() << std::endl;
-                    } else if (listTestChoice == 8) {
+                    }
+                    else if (listTestChoice == 8) {
                         //Test SeeAt function
-                    	std::cout << "Where in the list would you like to look?" << std::endl;
-                    	int seeAtIndex = 0;
-			            std::cin >> seeAtIndex;
-              		    std::cout << "The Part at " << seeAtIndex << " " << list.SeeAt(seeAtIndex).getPartInfo() << std::endl;
-                    } else if (listTestChoice == 9) {
+                        std::cout << "Where in the list would you like to look?" << std::endl;
+                        int seeAtIndex = 0;
+                        std::cin >> seeAtIndex;
+                        std::cout << "The Part at " << seeAtIndex << " " << list.SeeAt(seeAtIndex).getPartInfo() << std::endl;
+                    }
+                    else if (listTestChoice == 9) {
                         //Test Reset function
                         list.Reset();
                         std::cout << "Reset curLocation" << std::endl;
-                    } else if (listTestChoice == 10) {
+                    }
+					else if (listTestChoice == 10) {
+						//Display List
+						list.DisplayList();
+					}
+                    else if (listTestChoice == 11) {
                         //Go back
                         break;
-                    }else {
+                    }
+                    else {
                         std::cout << "Invalid choice" << std::endl;
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     std::cout << "Exception in List: " << e.errorMessage << std::endl;
                 }
             }
-        } else if (opChoice == 3) {
+        }
+        else if (opChoice == 3) {
             //Quit
             break;
-        } else {
+        }
+        else {
             std::cout << "Invalid choice" << std::endl;
         }
     }
