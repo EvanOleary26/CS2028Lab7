@@ -49,52 +49,53 @@ void List<T>::AddItem(T inVal) {
 template <class T>
 T List<T>::GetItem(T target) {
     Reset();       //Reset curLocation if the list is changed
-    Node<T> *temp = first;
+    Node<T>* temp = first;
 
-	if (first == nullptr) {
-	//Check if list is empty
-		throw Exception(1, "List is empty");
-	}
+    if (first == nullptr) {
+        //Check if list is empty
+        throw Exception(1, "List is empty");
+    }
 
     if (first->data == target) {
-    //Check if the first item in the list is the one that should be removed
+        //Check if the first item in the list is the one that should be removed
         length--;
         if (first->next == nullptr) {
-        //If there is only one item in the list
-            first=nullptr;
-            last=nullptr;
-        } else {
-        //If there is more than one item in the list
+            //If there is only one item in the list
+            first = nullptr;
+            last = nullptr;
+        }
+        else {
+            //If there is more than one item in the list
             first = first->next;
             first->prev = nullptr;
         }
-        T *data = new T(temp->data);
+        T* data = new T(temp->data);
         delete temp;
         return *data;
     }
 
-    while (temp->data != target && temp->next != nullptr) {
-    //Move through the list while not at the item to remove or at the end
+    while (!(temp->data == target || temp->next == nullptr)) {
+        //Move through the list while not at the item to remove or at the end
         temp = temp->next;
     }
 
     if (temp->next == nullptr) {
-    //Check if the loop got to the end of the list without finding the item
+        //Check if the loop got to the end of the list without finding the item
         throw Exception(1, "Item not found");
     }
-    
+
     if (temp->next != nullptr) {
-    //Check if the last item in the list is the target
+        //Check if the last item in the list is the target
         temp->next->prev = temp->prev;
     }
 
     if (temp->prev != nullptr) {
-    //Check if the first item in the list is the target
+        //Check if the first item in the list is the target
         temp->prev->next = temp->next;
     }
 
     //Connect previous to next and next to previous then return the value of the item removed
-    T *data = new T(temp->data);
+    T* data = new T(temp->data);
     delete temp;
     length--;
     return *data;
@@ -102,36 +103,33 @@ T List<T>::GetItem(T target) {
 
 template <class T>
 bool List<T>::IsInList(T target) {
-    Node<T> *temp = first;
+    Node<T>* temp = first;
     if (first == nullptr) {
-    //Return false if no items in the list
+        //Return false if no items in the list
         return false;
     }
 
     if (temp->data == target) {
-    //Check if the first item is the target
+        //Check if the first item is the target
         return true;
     }
 
-    while (temp->next != nullptr) {	
+    while (temp->next != nullptr) {
         //Continue while not at the end
         temp = temp->next;
         if (temp->data == target) {
-        //Stop when the item is found
+            //Stop when the item is found
             return true;
         }
     }
     //Return false if item is not found in loop
-    return false; 
+    return false;
 
 }
 
 template <class T>
 bool List<T>::IsEmpty() {
-    if (first == nullptr) {
-        return true;
-    }
-    return true;
+    return first == nullptr;
 }
 
 template <class T>
@@ -144,17 +142,15 @@ T List<T>::SeeNext() {
     if (first == nullptr) {
         throw Exception(1, "List is empty");
     }
-
     if (curLocation == nullptr) {
         curLocation = first;
-    } else {
+    }
+    else {
         curLocation = curLocation->next;
     }
-    
     if (curLocation == nullptr) {
         throw Exception(1, "Index out of bounds");
     }
-
     return curLocation->data;
 }
 
@@ -166,10 +162,11 @@ T List<T>::SeePrev() {
 
     if (curLocation == nullptr) {
         curLocation = last;
-    } else {
+    }
+    else {
         curLocation = curLocation->prev;
     }
-    
+
     if (curLocation == nullptr) {
         throw Exception(1, "Index out of bounds");
     }
@@ -179,7 +176,7 @@ T List<T>::SeePrev() {
 
 template <class T>
 T List<T>::SeeAt(int target) {
-    Node<T> *temp = first;
+    Node<T>* temp = first;
     for (int i = 0; i < target; i++) {
         temp = temp->next;
         if (temp == nullptr) {
@@ -188,6 +185,28 @@ T List<T>::SeeAt(int target) {
     }
     curLocation = temp;
     return temp->data;
+}
+
+template <class T>
+void List<T>::DisplayList() {
+    Node<T>* temp = first;
+	for (int i = 0; i < length; i++) {
+        std::cout << "----------------------" << std::endl;
+        std::cout << "| SKU: " << temp->data.sku;
+        int skulength = 6 + std::to_string(temp->data.sku).length();
+        for (int i = 0; i < 20 - skulength + 1; i++) {
+            std::cout << " ";
+        }
+        std::cout << "|" << std::endl;
+        std::cout << "| Available: " << temp->data.quantityOnHand;
+        int availiblelength = 12 + std::to_string(temp->data.quantityOnHand).length();
+        for (int i = 0; i < 20 - availiblelength; i++) {
+            std::cout << " ";
+        }
+        std::cout << " |" << std::endl;
+        temp = temp->next;
+	}        
+    std::cout << "----------------------" << std::endl;
 }
 
 
