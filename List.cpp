@@ -191,24 +191,10 @@ template <class T>
 void List<T>::DisplayList() {
     Node<T>* temp = first;
 	for (int i = 0; i < length; i++) {
-        std::cout << "----------------------" << std::endl;
-        std::cout << "| SKU: " << temp->data.sku;
-        int skulength = 6 + std::to_string(temp->data.sku).length();
-        for (int i = 0; i < 20 - skulength + 1; i++) {
-            std::cout << " ";
-        }
-        std::cout << "|" << std::endl;
-        std::cout << "| Available: " << temp->data.quantityOnHand;
-        int availiblelength = 12 + std::to_string(temp->data.quantityOnHand).length();
-        for (int i = 0; i < 20 - availiblelength; i++) {
-            std::cout << " ";
-        }
-        std::cout << " |" << std::endl;
+        temp->data.display();
         temp = temp->next;
 	}        
-    std::cout << "----------------------" << std::endl;
 }
-
 
 template <class T>
 void List<T>::Reset() {
