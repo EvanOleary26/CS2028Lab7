@@ -1,5 +1,6 @@
 #include <iostream>
-#include <String>
+#include <string>
+
 #include "List.h"
 #include "Part.h"
 #include "Exceptions.h"
@@ -81,7 +82,6 @@ int main() {
     List<Part> list;
     Part part;
 
-    try{
     while (true) {
         //Get users choice of Part or List function testing
         std::cout << "\nWhat would you like to do?" << std::endl;
@@ -156,28 +156,38 @@ int main() {
                         std::cout << "Added " << list.SeeNext().getPartInfo() << std::endl;
                     } else if (listTestChoice == 2) {
                         //Test GetItem function
-                        std::cout << list.GetItem(part).getPartInfo() << std::endl;
+                        std::cout << "Removed " << list.GetItem(part).getPartInfo() << std::endl;
                     } else if (listTestChoice == 3) {
                         //Test IsInList function
-                        std::cout << list.IsInList(part) << std::endl;
+                        std::cout << "Enter the part you would like to check for in the list" << std::endl;
+                        part = getUserPartInfo();
+                        if (list.IsInList(part)) {
+                            std::cout << "Part is in list" << std::endl;
+                        } else {
+                            std::cout << "Part is not in list" << std::endl;
+                        }
                     } else if (listTestChoice == 4) {
                         //Test IsEmpty function
-                        std::cout << list.IsEmpty() << std::endl;
+                        if (list.IsEmpty()) {
+                            std::cout << "List is empty" << std::endl;
+                        } else {
+                            std::cout << "List is not empty" << std::endl;
+                        }
                     } else if (listTestChoice == 5) {
                         //Test Size function
-                        std::cout << list.Size() << std::endl;
+                        std::cout << "The size of the list is " << list.Size() << std::endl;
                     } else if (listTestChoice == 6) {
                         //Test SeeNext function
-                        std::cout << list.SeeNext().getPartInfo() << std::endl;
+                        std::cout << "The next part in the list is " << list.SeeNext().getPartInfo() << std::endl;
                     } else if (listTestChoice == 7) {
                         //Test SeePrev function
-                        std::cout << list.SeePrev().getPartInfo() << std::endl;
+                        std::cout << "The previous part in the list is " << list.SeePrev().getPartInfo() << std::endl;
                     } else if (listTestChoice == 8) {
                         //Test SeeAt function
                     	std::cout << "Where in the list would you like to look?" << std::endl;
                     	int seeAtIndex = 0;
-			std::cin >> seeAtIndex;
-              		std::cout << parts.SeeAt(seeAtIndex).getPartInfo() << std::endl;
+			            std::cin >> seeAtIndex;
+              		    std::cout << "The Part at " << seeAtIndex << " " << list.SeeAt(seeAtIndex).getPartInfo() << std::endl;
                     } else if (listTestChoice == 9) {
                         //Test Reset function
                         list.Reset();
