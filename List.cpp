@@ -63,42 +63,45 @@ T List<T>::GetItem(T target) {
             //If there is only one item in the list
             first = nullptr;
             last = nullptr;
-        }
-        else {
+        } else {
             //If there is more than one item in the list
             first = first->next;
             first->prev = nullptr;
         }
-        T* data = new T(temp->data);
+        T data = temp->data;
         delete temp;
-        return *data;
+        return data;
     }
 
-    while (temp->data != target || temp->next != nullptr) {
+    while (temp != nullptr && temp->data != target) {
         //Move through the list while not at the item to remove or at the end
         temp = temp->next;
     }
 
-    if (temp->next == nullptr && temp->data != target) {
+    if (temp == nullptr) {
         //Check if the loop got to the end of the list without finding the item
         throw Exception(1, "Item not found");
     }
 
-    if (temp->next == nullptr && temp->data == target) {
+    if (temp->next != nullptr) {
         //Check if the last item in the list is the target
         temp->next->prev = temp->prev;
+    } else {
+        //If the last item in the list is the target
+        last = temp->prev;
     }
-    /*
+    
     if (temp->prev == nullptr) {
         //Check if the first item in the list is the target
         temp->prev->next = temp->next;
+    } else {
+        //If the first item in the list is the target
+        first = temp->next;
     }
-    */
+    
 
     //Connect previous to next and next to previous then return the value of the item removed
     T data = temp->data;
-    temp->prev->next = temp->next;
-    temp->next->prev = temp->prev;
     delete temp;
     length--;
     return data;

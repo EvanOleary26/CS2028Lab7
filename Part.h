@@ -37,6 +37,7 @@ public:
     bool operator>(const Part& right) const;
     bool operator<(const Part& right) const;
     bool operator==(const Part& right) const;
+    bool operator!=(const Part& right) const;
 };
 
 

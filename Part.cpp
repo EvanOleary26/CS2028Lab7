@@ -95,6 +95,10 @@ bool Part::operator==(const Part &right) const {
     return this->sku == right.sku;
 }
 
+bool Part::operator!=(const Part &right) const {
+    return this->sku != right.sku;
+}
+
 void Part::display() {
     std::cout << "----------------------" << std::endl;
     std::cout << "| SKU: " << this->sku;
