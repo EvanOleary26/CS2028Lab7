@@ -165,11 +165,14 @@ int main() {
                 try {
                     if (listTestChoice == 1) {
                         //Test AddItem function
-                        list.AddItem(getUserPartInfo());
-                        std::cout << "Added " << list.SeeNext().getPartInfo() << std::endl;
+                        part = getUserPartInfo();
+                        list.AddItem(part);
+                        std::cout << "Added " << part.getPartInfo() << std::endl;
                     }
                     else if (listTestChoice == 2) {
                         //Test GetItem function
+                        std::cout << "What part would you like to remove?" << std::endl;
+                        part = getUserPartInfo();
                         std::cout << "Removed " << list.GetItem(part).getPartInfo() << std::endl;
                     }
                     else if (listTestChoice == 3) {
@@ -178,20 +181,20 @@ int main() {
                         part = getUserPartInfo();
                         bool inList = list.IsInList(part);
                         if (inList) {
-                            std::cout << "Part is in list" << std::endl;
+                            std::cout << part.getPartInfo() << " is in the list" << std::endl;
                         }
                         else {
-                            std::cout << "Part is not in list" << std::endl;
+                            std::cout << part.getPartInfo() <<  " is not in the list" << std::endl;
                         }
                     }
                     else if (listTestChoice == 4) {
                         //Test IsEmpty function
 						bool listempty = list.IsEmpty();
                         if (listempty) {
-                            std::cout << "List is empty" << std::endl;
+                            std::cout << "The list is empty" << std::endl;
                         }
                         else {
-                            std::cout << "List is not empty" << std::endl;
+                            std::cout << "The list is not empty" << std::endl;
                         }
                     }
                     else if (listTestChoice == 5) {
@@ -211,7 +214,7 @@ int main() {
                         std::cout << "Where in the list would you like to look?" << std::endl;
                         int seeAtIndex = 0;
                         std::cin >> seeAtIndex;
-                        std::cout << "The Part at " << seeAtIndex << " " << list.SeeAt(seeAtIndex).getPartInfo() << std::endl;
+                        std::cout << "The Part at index " << seeAtIndex << " is " << list.SeeAt(seeAtIndex).getPartInfo() << std::endl;
                     }
                     else if (listTestChoice == 9) {
                         //Test Reset function

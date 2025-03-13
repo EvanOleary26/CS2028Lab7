@@ -1,4 +1,3 @@
-
 #include "Part.h"
 #include "Exceptions.h"
 #include <string>
@@ -41,13 +40,22 @@ bool Part::Available(int inMonth, int inDay, int inYear) {
 
     //Get current date
     time_t now = time(0);
+    struct tm *ltm = localtime(&now);
+
+    int currentMonth = ltm->tm_mon + 1;
+    int currentDay = ltm->tm_mday;
+    int currentYear = ltm->tm_year + 1900;
+
+    /*
+    time_t now = time(0);
     struct tm ltm;
-    localtime_s(&ltm, &now);
+    localtime_s(&ltm,&now);
 
     int currentMonth = ltm.tm_mon + 1;
     int currentDay = ltm.tm_mday;
     int currentYear = ltm.tm_year + 1900;
-
+    */
+    
     if (inYear < currentYear) {
         //If the year requested is less than the current year, the part is not available
         return false;
@@ -64,27 +72,26 @@ bool Part::Available(int inMonth, int inDay, int inYear) {
                 //and the current day plus the lead time is less than the requested day, the part is available
                 return true;
             }
-        }
-        else if (currentMonth < inMonth) {
-            if ((currentDay + leadTime) % months[currentMonth] >= inDay) {
+        } else if (currentMonth < inMonth) {
+            if ( (currentDay + leadTime) % months[currentMonth] >= inDay) {
                 return true;
             }
         }
     }
 
     return false;
-
+    
 }
 
-bool Part::operator>(const Part& right) const {
+bool Part::operator>(const Part &right) const {
     return this->sku > right.sku;
 }
 
-bool Part::operator<(const Part& right) const {
+bool Part::operator<(const Part &right) const {
     return this->sku < right.sku;
 }
 
-bool Part::operator==(const Part& right) const {
+bool Part::operator==(const Part &right) const {
     return this->sku == right.sku;
 }
 

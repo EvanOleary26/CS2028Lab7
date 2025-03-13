@@ -74,31 +74,34 @@ T List<T>::GetItem(T target) {
         return *data;
     }
 
-    while (!(temp->data == target || temp->next == nullptr)) {
+    while (temp->data != target || temp->next != nullptr) {
         //Move through the list while not at the item to remove or at the end
         temp = temp->next;
     }
 
-    if (temp->next == nullptr) {
+    if (temp->next == nullptr && temp->data != target) {
         //Check if the loop got to the end of the list without finding the item
         throw Exception(1, "Item not found");
     }
 
-    if (temp->next != nullptr) {
+    if (temp->next == nullptr && temp->data == target) {
         //Check if the last item in the list is the target
         temp->next->prev = temp->prev;
     }
-
-    if (temp->prev != nullptr) {
+    /*
+    if (temp->prev == nullptr) {
         //Check if the first item in the list is the target
         temp->prev->next = temp->next;
     }
+    */
 
     //Connect previous to next and next to previous then return the value of the item removed
-    T* data = new T(temp->data);
+    T data = temp->data;
+    temp->prev->next = temp->next;
+    temp->next->prev = temp->prev;
     delete temp;
     length--;
-    return *data;
+    return data;
 }
 
 template <class T>
@@ -193,6 +196,9 @@ void List<T>::DisplayList() {
 	for (int i = 0; i < length; i++) {
         temp->data.display();
         temp = temp->next;
+        if (temp != nullptr) {
+            std::cout << "         |  |" << std::endl;
+        }
 	}        
 }
 
