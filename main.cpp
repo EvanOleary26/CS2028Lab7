@@ -156,7 +156,7 @@ int main() {
             //List function testing
             while (true) {
                 std::cout << "\nWhich List function would you like to test?" << std::endl;
-                std::cout << "1. AddItem\n2. GetItem\n3. IsInList\n4. IsEmpty\n5. Size\n6. SeeNext\n7. SeePrev\n8. SeeAt\n9. Reset\n10. Display List\n11.Go Back" << std::endl;
+                std::cout << "1. AddItem\n2. GetItem\n3. IsInList\n4. IsEmpty\n5. Size\n6. SeeNext\n7. SeePrev\n8. SeeAt\n9. Reset\n10. Display List\n11. Go Back" << std::endl;
 
                 listTestChoice = 0;
                 std::cin >> listTestChoice;

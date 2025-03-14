@@ -91,7 +91,7 @@ T List<T>::GetItem(T target) {
         last = temp->prev;
     }
     
-    if (temp->prev == nullptr) {
+    if (temp->prev != nullptr) {
         //Check if the first item in the list is the target
         temp->prev->next = temp->next;
     } else {
@@ -196,7 +196,7 @@ T List<T>::SeeAt(int target) {
 template <class T>
 void List<T>::DisplayList() {
     Node<T>* temp = first;
-	for (int i = 0; i < length; i++) {
+	while (temp != nullptr) {
         temp->data.display();
         temp = temp->next;
         if (temp != nullptr) {
