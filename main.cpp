@@ -172,7 +172,7 @@ int main() {
                     else if (listTestChoice == 2) {
                         //Test GetItem function
                         std::cout << "What part would you like to remove?" << std::endl;
-                        part = getUserPartInfo();
+                        Part part = getUserPartInfo();
                         std::cout << "Removed " << list.GetItem(part).getPartInfo() << std::endl;
                     }
                     else if (listTestChoice == 3) {
