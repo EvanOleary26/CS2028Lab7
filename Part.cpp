@@ -38,6 +38,8 @@ bool Part::Available(int inMonth, int inDay, int inYear) {
         throw Exception(1, "Invalid day");
     }
 
+/*
+3/24/25 4:25p : This is invalid syntax
     //Get current date
     time_t now = time(0);
     struct tm *ltm = localtime(&now);
@@ -45,16 +47,16 @@ bool Part::Available(int inMonth, int inDay, int inYear) {
     int currentMonth = ltm->tm_mon + 1;
     int currentDay = ltm->tm_mday;
     int currentYear = ltm->tm_year + 1900;
-
-    /*
-    time_t now = time(0);
+*/
+    
+    time_t now = time(0); //this is the valid syntax
     struct tm ltm;
     localtime_s(&ltm,&now);
 
     int currentMonth = ltm.tm_mon + 1;
     int currentDay = ltm.tm_mday;
     int currentYear = ltm.tm_year + 1900;
-    */
+    
     
     if (inYear < currentYear) {
         //If the year requested is less than the current year, the part is not available
