@@ -93,19 +93,19 @@ int main() {
                 std::cout << "The size of the list is " << list.Size() << std::endl;
             } else if (choice == 6) {
                 // See Next Part in List
-                std::cout << "The next part in the list is " << list.SeeNext().getPartInfo() << std::endl;
                 part = list.SeeNext();
+                std::cout << "The next part in the list is " << part.getPartInfo() << std::endl;
             } else if (choice == 7) {
                 // See Previous Part in List
-                std::cout << "The previous part in the list is " << list.SeePrev().getPartInfo() << std::endl;
                 part = list.SeePrev();
+                std::cout << "The previous part in the list is " << part.getPartInfo() << std::endl;
             } else if (choice == 8) {
                 // See Part at Index
                 int index = 0;
                 std::cout << "Enter the index of the part you want to see: ";
                 std::cin >> index;
-                std::cout << "The part at index " << index << " is " << list.SeeAt(index).getPartInfo() << std::endl;
                 part = list.SeeAt(index);
+                std::cout << "The part at index " << index << " is " << part.getPartInfo() << std::endl;
             } else if (choice == 9) {
                 // Reset List
                 list.Reset();
